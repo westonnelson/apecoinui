@@ -14,7 +14,7 @@ const useEvents = () => {
 
   async function connectToMetamask() {
     const contract = new Contract(
-      "0x5bBacBb0EA1B5d450d92850cB8AB5f1AAD92C97A",
+      "0xe3d143d7b864f2d0f76f9080d758ded8ca262b26",
       StakingABI,
       provider
     );
@@ -46,7 +46,7 @@ const useEvents = () => {
   }, [alreadyAdded]);
 
   useContractEvent({
-    address: "0x5954aB967Bc958940b7EB73ee84797Dc8a2AFbb9",
+    address: "0xe3d143d7b864f2d0f76f9080d758ded8ca262b26",
     abi: StakingABI,
     eventName: "Deposit",
     listener(...args) {
@@ -62,7 +62,7 @@ const useEvents = () => {
   });
 
   useContractEvent({
-    address: "0x5954aB967Bc958940b7EB73ee84797Dc8a2AFbb9",
+    address: "0xe3d143d7b864f2d0f76f9080d758ded8ca262b26",
     abi: StakingABI,
     eventName: "DepositNft",
     listener(...args) {
@@ -78,7 +78,7 @@ const useEvents = () => {
   });
 
   useContractEvent({
-    address: "0x5954aB967Bc958940b7EB73ee84797Dc8a2AFbb9",
+    address: "0xe3d143d7b864f2d0f76f9080d758ded8ca262b26",
     abi: StakingABI,
     eventName: "DepositPairNft",
     listener(...args) {
@@ -94,7 +94,7 @@ const useEvents = () => {
   });
 
   useContractEvent({
-    address: "0x5954aB967Bc958940b7EB73ee84797Dc8a2AFbb9",
+    address: "0xe3d143d7b864f2d0f76f9080d758ded8ca262b26",
     abi: StakingABI,
     eventName: "Withdraw",
     listener(...args) {
@@ -126,7 +126,7 @@ const useEvents = () => {
   });
 
   useContractEvent({
-    address: "0x5954aB967Bc958940b7EB73ee84797Dc8a2AFbb9",
+    address: "0xe3d143d7b864f2d0f76f9080d758ded8ca262b26",
     abi: StakingABI,
     eventName: "WithdrawPairNft",
     listener(...args) {
@@ -174,7 +174,7 @@ const useEvents = () => {
   });
 
   useContractEvent({
-    address: "0x5954aB967Bc958940b7EB73ee84797Dc8a2AFbb9",
+    address: "0xe3d143d7b864f2d0f76f9080d758ded8ca262b26",
     abi: StakingABI,
     eventName: "ClaimRewardsPairNft",
     listener(...args) {

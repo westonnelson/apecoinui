@@ -10,7 +10,7 @@ import {
   useWaitForTransaction,
 } from "wagmi";
 
-import ABI from "@/abis/nftetoken";
+import ABI from "@/abis/nfte";
 import { Map } from "@/types/map";
 
 const nfteTokenContractAddresses: Map = {

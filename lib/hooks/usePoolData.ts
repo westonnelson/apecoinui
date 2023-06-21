@@ -6,8 +6,8 @@ import { Map } from "@/types/map";
 import { PoolData } from "@/types/data";
 
 const stakingContractAddresses: Map = {
-  1: "0x5954aB967Bc958940b7EB73ee84797Dc8a2AFbb9",
-  5: "0xeF37717B1807a253c6D140Aca0141404D23c26D4",
+  1: "0xe3d143d7b864f2d0f76f9080d758ded8ca262b26",
+
 } as const;
 
 function calculateAPR(perDayPool: number, stakedAmount: number): number {
@@ -39,6 +39,9 @@ function usePoolData(): {
     2: {
       name: "ROBOROVER",
     },
+    3: {
+      name: "NFW3C",
+    },
   });
 
   useEffect(() => {
@@ -52,23 +55,23 @@ function usePoolData(): {
     if (poolsContractRead.isSuccess) {
       setInitialLoad(true);
 
-      const nfteRewardPoolPerHour = +formatUnits(
+      const nfteTokenRewardPoolPerHour = +formatUnits(
         poolsContractRead.data[0].currentTimeRange.rewardsPerHour
       );
 
-      const nfteRewardPoolPerDay = nfteRewardPoolPerHour * 24;
+      const nfteTokenTokenRewardPoolPerDay = nfteTokenRewardPoolPerHour * 24;
 
-      const apeRewardPerHour =
+      const nfteTokenRewardPerHour =
         +formatUnits(
           poolsContractRead.data[0].currentTimeRange.rewardsPerHour
         ) / +formatUnits(poolsContractRead.data[0].stakedAmount);
 
-      const nfteRewardPerDay = nfteRewardPerHour * 24;
+      const nfteTokenRewardPerDay = nfteTokenRewardPerHour * 24;
 
-      const nfteStakedAmount = +formatUnits(
+      const nfteTokenStakedAmount = +formatUnits(
         poolsContractRead.data[0].stakedAmount
       );
-      const nftePoolAPR = calculateAPR(nfteRewardPoolPerDay, nfteStakedAmount);
+      const nfteTokenPoolAPR = calculateAPR(nfteTokenRewardPoolPerDay, nfteTokenStakedAmount);
 
       const earthlingRewardPoolPerHour = +formatUnits(
         poolsContractRead.data[1].currentTimeRange.rewardsPerHour
@@ -109,12 +112,12 @@ function usePoolData(): {
       setPoolData({
         0: {
           name: "NFTE",
-          apr: nftePoolAPR,
-          stakedAmount: nfteStakedAmount,
-          rewardPoolPerHour: nfteRewardPoolPerHour,
-          rewardPoolPerDay: nfteRewardPoolPerDay,
-          rewardPerHour: nfteRewardPerHour,
-          rewardPerDay: nfteRewardPerDay,
+          apr: nfteTokenPoolAPR,
+          stakedAmount: nfteTokenStakedAmount,
+          rewardPoolPerHour: nfteTokenRewardPoolPerHour,
+          rewardPoolPerDay: nfteTokenRewardPoolPerDay,
+          rewardPerHour: nfteTokenRewardPerHour,
+          rewardPerDay: nfteTokenRewardPerDay,
         },
         1: {
           name: "EARTHLING",
@@ -133,6 +136,15 @@ function usePoolData(): {
           rewardPoolPerDay: roboroverRewardPoolPerDay,
           rewardPerHour: roboroverRewardPerHour,
           rewardPerDay: roboroverRewardPerDay,
+        },
+        3: {
+          name: "NFW3C",
+          apr: nfw3cPoolAPR,
+          stakedAmount: nfw3cStakedAmount,
+          rewardPoolPerHour: nfw3cRewardPoolPerHour,
+          rewardPoolPerDay: nfw3cRewardPoolPerDay,
+          rewardPerHour: nfw3cRewardPerHour,
+          rewardPerDay: nfw3cRewardPerDay,
         },
       });
     }
