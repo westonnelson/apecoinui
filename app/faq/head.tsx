@@ -1,16 +1,16 @@
 export default function Head() {
   return (
     <>
-      <title>ApeCoin UI - Frequently Asked Questions</title>
+      <title>NFTEarth Staking - Frequently Asked Questions</title>
       <meta name="viewport" content="width=device-width, initial-scale=0.5" />
 
       <meta
         name="description"
-        content="Frequently asked questions about ApeCoin, staking and related issues."
+        content="Frequently Asked Questions about NFTEarth and staking rewards"
       />
       <meta
         property="og:title"
-        content="Frequently asked questions about ApeCoin, staking and related issues."
+        content="Frequently Asked Questions about NFTEarth and staking rewards"
       />
       <meta property="og:site_name" content="ApeCoin UI" />
       <meta property="og:url" content="https://apecoinui.com" />

@@ -25,22 +25,19 @@ function usePoolData(): {
     abi: StakingABI,
     functionName: "getPoolsUI",
     watch: true,
-    chainId: chain?.id || 1,
+    chainId: chain?.id || 4,
   });
 
   const [initialLoad, setInitialLoad] = useState(false);
   const [poolData, setPoolData] = useState<PoolData>({
     0: {
-      name: "APE",
+      name: "NFTE",
     },
     1: {
-      name: "BAYC",
+      name: "EARTHLING",
     },
     2: {
-      name: "MAYC",
-    },
-    3: {
-      name: "BAKC",
+      name: "ROBOROVER",
     },
   });
 
@@ -55,114 +52,87 @@ function usePoolData(): {
     if (poolsContractRead.isSuccess) {
       setInitialLoad(true);
 
-      const apeRewardPoolPerHour = +formatUnits(
+      const nfteRewardPoolPerHour = +formatUnits(
         poolsContractRead.data[0].currentTimeRange.rewardsPerHour
       );
 
-      const apeRewardPoolPerDay = apeRewardPoolPerHour * 24;
+      const nfteRewardPoolPerDay = nfteRewardPoolPerHour * 24;
 
       const apeRewardPerHour =
         +formatUnits(
           poolsContractRead.data[0].currentTimeRange.rewardsPerHour
         ) / +formatUnits(poolsContractRead.data[0].stakedAmount);
 
-      const apeRewardPerDay = apeRewardPerHour * 24;
+      const nfteRewardPerDay = nfteRewardPerHour * 24;
 
-      const apeStakedAmount = +formatUnits(
+      const nfteStakedAmount = +formatUnits(
         poolsContractRead.data[0].stakedAmount
       );
-      const apePoolAPR = calculateAPR(apeRewardPoolPerDay, apeStakedAmount);
+      const nftePoolAPR = calculateAPR(nfteRewardPoolPerDay, nfteStakedAmount);
 
-      const baycRewardPoolPerHour = +formatUnits(
+      const earthlingRewardPoolPerHour = +formatUnits(
         poolsContractRead.data[1].currentTimeRange.rewardsPerHour
       );
 
-      const baycRewardPoolPerDay = baycRewardPoolPerHour * 24;
+      const earthlingRewardPoolPerDay = earthlingRewardPoolPerHour * 24;
 
-      const baycRewardPerHour =
+      const earthlingRewardPerHour =
         +formatUnits(
           poolsContractRead.data[1].currentTimeRange.rewardsPerHour
         ) / +formatUnits(poolsContractRead.data[1].stakedAmount);
 
-      const baycRewardPerDay = baycRewardPerHour * 24;
+      const earthlingRewardPerDay = earthlingRewardPerHour * 24;
 
-      const baycStakedAmount = +formatUnits(
+      const earthlingStakedAmount = +formatUnits(
         poolsContractRead.data[1].stakedAmount
       );
-      const baycPoolAPR = calculateAPR(baycRewardPoolPerDay, baycStakedAmount);
+      const earthlingPoolAPR = calculateAPR(earthlingRewardPoolPerDay, earthlingStakedAmount);
 
-      const maycRewardPoolPerHour = +formatUnits(
+      const roboroverRewardPoolPerHour = +formatUnits(
         poolsContractRead.data[2].currentTimeRange.rewardsPerHour
       );
 
-      const maycRewardPoolPerDay = maycRewardPoolPerHour * 24;
+      const roboroverRewardPoolPerDay = roboroverRewardPoolPerHour * 24;
 
-      const maycRewardPerHour =
+      const roboroverRewardPerHour =
         +formatUnits(
           poolsContractRead.data[2].currentTimeRange.rewardsPerHour
         ) / +formatUnits(poolsContractRead.data[2].stakedAmount);
 
-      const maycRewardPerDay = maycRewardPerHour * 24;
+      const roboroverRewardPerDay = roboroverRewardPerHour * 24;
 
-      const maycStakedAmount = +formatUnits(
+      const roboroverStakedAmount = +formatUnits(
         poolsContractRead.data[2].stakedAmount
       );
-      const maycPoolAPR = calculateAPR(maycRewardPoolPerDay, maycStakedAmount);
-
-      const bakcRewardPoolPerHour = +formatUnits(
-        poolsContractRead.data[3].currentTimeRange.rewardsPerHour
-      );
-
-      const bakcRewardPoolPerDay = bakcRewardPoolPerHour * 24;
-
-      const bakcRewardPerHour =
-        +formatUnits(
-          poolsContractRead.data[3].currentTimeRange.rewardsPerHour
-        ) / +formatUnits(poolsContractRead.data[3].stakedAmount);
-
-      const bakcRewardPerDay = bakcRewardPerHour * 24;
-
-      const bakcStakedAmount = +formatUnits(
-        poolsContractRead.data[3].stakedAmount
-      );
-      const bakcPoolAPR = calculateAPR(bakcRewardPoolPerDay, bakcStakedAmount);
+      const roboroverPoolAPR = calculateAPR(roboroverRewardPoolPerDay, roboroverStakedAmount);
 
       setPoolData({
         0: {
-          name: "APE",
-          apr: apePoolAPR,
-          stakedAmount: apeStakedAmount,
-          rewardPoolPerHour: apeRewardPoolPerHour,
-          rewardPoolPerDay: apeRewardPoolPerDay,
-          rewardPerHour: apeRewardPerHour,
-          rewardPerDay: apeRewardPerDay,
+          name: "NFTE",
+          apr: nftePoolAPR,
+          stakedAmount: nfteStakedAmount,
+          rewardPoolPerHour: nfteRewardPoolPerHour,
+          rewardPoolPerDay: nfteRewardPoolPerDay,
+          rewardPerHour: nfteRewardPerHour,
+          rewardPerDay: nfteRewardPerDay,
         },
         1: {
-          name: "BAYC",
-          apr: baycPoolAPR,
-          stakedAmount: baycStakedAmount,
-          rewardPoolPerHour: baycRewardPoolPerHour,
-          rewardPoolPerDay: baycRewardPoolPerDay,
-          rewardPerHour: baycRewardPerHour,
-          rewardPerDay: baycRewardPerDay,
+          name: "EARTHLING",
+          apr: earthlingPoolAPR,
+          stakedAmount: earthlingStakedAmount,
+          rewardPoolPerHour: earthlingRewardPoolPerHour,
+          rewardPoolPerDay: bearthlingRewardPoolPerDay,
+          rewardPerHour: earthlingRewardPerHour,
+          rewardPerDay: earthlingRewardPerDay,
         },
         2: {
-          name: "MAYC",
-          apr: maycPoolAPR,
-          stakedAmount: maycStakedAmount,
-          rewardPoolPerHour: maycRewardPoolPerHour,
-          rewardPoolPerDay: maycRewardPoolPerDay,
-          rewardPerHour: maycRewardPerHour,
-          rewardPerDay: maycRewardPerDay,
-        },
-        3: {
-          name: "BAKC",
-          apr: bakcPoolAPR,
-          stakedAmount: bakcStakedAmount,
-          rewardPoolPerHour: bakcRewardPoolPerHour,
-          rewardPoolPerDay: bakcRewardPoolPerDay,
-          rewardPerHour: bakcRewardPerHour,
-          rewardPerDay: bakcRewardPerDay,
+          name: "ROBOROVER",
+          apr: roboroverPoolAPR,
+          stakedAmount: roboroverStakedAmount,
+          rewardPoolPerHour: roboroverRewardPoolPerHour,
+          rewardPoolPerDay: roboroverRewardPoolPerDay,
+          rewardPerHour: roboroverRewardPerHour,
+          rewardPerDay: roboroverRewardPerDay,
         },
       });
     }

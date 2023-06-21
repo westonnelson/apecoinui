@@ -8,6 +8,8 @@ import { TimeFrame } from "@/types/timeframe";
 import { Amount } from "@/types/data";
 
 interface AppState {
+  nfteTokenBalance: any;
+  setNfteTokenBalance: any;
   autoConnecting: boolean;
   setAutoConnecting: (autoConnecting: boolean) => void;
 

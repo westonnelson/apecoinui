@@ -1,5 +1,5 @@
 import { useAccount, useContractRead, useNetwork } from "wagmi";
-import ApeCoinABI from "@/abis/apecoin";
+import ApeCoinABI from "@/abis/nfte";
 import { Map } from "@/types/map";
 
 const stakingContractAddresses: Map = {

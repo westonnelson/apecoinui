@@ -14,7 +14,7 @@ const useEvents = () => {
 
   async function connectToMetamask() {
     const contract = new Contract(
-      "0x5954aB967Bc958940b7EB73ee84797Dc8a2AFbb9",
+      "0x5bBacBb0EA1B5d450d92850cB8AB5f1AAD92C97A",
       StakingABI,
       provider
     );
