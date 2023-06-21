@@ -2,13 +2,13 @@
 
 import { formatUnits, parseUnits } from "ethers/lib/utils.js";
 import { ethers, BigNumber } from "ethers";
-import usenfteTokenBalance from "@/hooks/usenfteTokenBalance";
+import useNfteTokenBalance from "@/hooks/useNfteTokenBalance";
 import { useState } from "react";
 
 const MAX_STAKES = {
-  1: 10094,
-  2: 2042,
-  3: 856,
+  1: TBD,
+  2: TBD,
+  3: TBD,
 } as const;
 
 interface poolStakesData {

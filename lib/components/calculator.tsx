@@ -12,7 +12,7 @@ import { PoolType } from "@/types/data";
 import TimeframeSelector from "@/components/timeframeSelector";
 import { Dispatch, useEffect, useState } from "react";
 import useBalances from "@/hooks/useBalances";
-import usenfteTokenBalance from "@/hooks/usenfteTokenBalance";
+import useNfteTokenBalance from "@/hooks/useNfteTokenBalance";
 import { useAccount } from "wagmi";
 import useAllStakes from "@/hooks/useAllStakes";
 import { BigNumber } from "ethers";
@@ -23,7 +23,7 @@ export default function Calculator() {
   const { timeframe } = useTimeframe();
   const { earthlingsPoolStakable, roboroversPoolStakable, nfw3cPoolStakable } =
     useBalances();
-  const { nfteTokenBalance } = usenfteTokenBalance();
+  const { nfteTokenBalance } = useNfteTokenBalance();
 
   const { address } = useAccount();
 

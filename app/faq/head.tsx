@@ -13,19 +13,19 @@ export default function Head() {
         content="Frequently Asked Questions about NFTEarth and staking rewards"
       />
       <meta property="og:site_name" content="NFTEarth" />
-      <meta property="og:url" content="https://apecoinui.com" />
+      <meta property="og:url" content="https://nftearth.exchange" />
       <meta property="og:type" content="website" />
-      <meta property="og:image" content="https://apecoinui.com/opengraph.png" />
-      <meta name="twitter:site" content="@ApeCollector" />
+      <meta property="og:image" content="https://nftearth.exchange/opengraph.png" />
+      <meta name="twitter:site" content="@NFTEarth_L2" />
       <meta name="twitter:title" content="NFTEarth" />
       <meta
         name="twitter:description"
-        content="Frequently asked questions about ApeCoin, staking and related issues."
+        content="Frequently asked questions about NFTE, staking and related issues."
       />
       <meta name="twitter:card" content="summary_large_image" />
       <meta
         name="twitter:image:src"
-        content="https://apecoinui.com/opengraph.png"
+        content="https://nftearth.exchange/opengraph.png"
       />
       <link rel="icon" href="./teeth.png" />
     </>

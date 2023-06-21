@@ -10,8 +10,8 @@ const nfteTokenContractAddresses: Map = {
 
 import useStore from "@/stores/store";
 
-const usenfteTokenBalance = () => {
-  const NfteTokenBalance = useStore((state) => state.NfteTokenBalance);
+const useNfteTokenBalance = () => {
+  const nfteTokenBalance = useStore((state) => state.nfteTokenBalance);
   const setNfteTokenBalance = useStore((state) => state.setNfteTokenBalance);
 
   const { address, isConnected } = useAccount();
@@ -19,7 +19,7 @@ const usenfteTokenBalance = () => {
   const balance = useBalance({
     enabled: isConnected,
     address: address,
-    token: NfteTokenContractAddresses[chain?.id!] as `0x{String}`,
+    token: nftetokenContractAddresses[chain?.id!] as `0x{String}`,
     watch: true,
   });
 
@@ -35,7 +35,7 @@ const usenfteTokenBalance = () => {
     }
   }, [isConnected]);
 
-  return { NfteTokenBalance, setNfteTokenBalance };
+  return { nfteTokenBalance, setNfteTokenBalance };
 };
 
 export default useNfteTokenBalance;

@@ -7,7 +7,7 @@ import { BigNumber } from "ethers";
 export default function usePrice() {
   const [nfteTokenPrice, setNfteTokenPrice] = useState<BigNumber>();
 
-  const nfteTokenPricePriceContractRead = useContractRead({
+  const nfteTokenPriceContractRead = useContractRead({
     address: "0xB261104A83887aE92392Fb5CE5899fCFe5481456",
     abi: PriceABI,
     functionName: "latestRoundData",
@@ -17,16 +17,16 @@ export default function usePrice() {
 
   useEffect(() => {
     if (
-      nfteTokenPricePriceContractRead &&
-      nfteTokenPricePriceContractRead.data &&
-      nfteTokenPricePriceContractRead.isSuccess
+      nfteTokenPriceContractRead &&
+      nfteTokenPriceContractRead.data &&
+      nfteTokenPriceContractRead.isSuccess
     ) {
       setnfteTokenPrice(nfteTokenPricePriceContractRead.data.answer);
     }
   }, [
-    nfteTokenPricePriceContractRead.isSuccess,
-    nfteTokenPricePriceContractRead.isRefetching,
-    nfteTokenPricePriceContractRead.data,
+    nfteTokenPriceContractRead.isSuccess,
+    nfteTokenPriceContractRead.isRefetching,
+    nfteTokenPriceContractRead.data,
   ]);
 
   const [ethereumPrice, setEthereumPrice] = useState<BigNumber>();

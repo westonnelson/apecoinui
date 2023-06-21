@@ -14,11 +14,11 @@ import ABI from "@/abis/nfte";
 import { Map } from "@/types/map";
 
 const nfteTokenContractAddresses: Map = {
-  1: "0xb261104a83887ae92392fb5ce5899fcfe5481456",
+  42161: "0xb261104a83887ae92392fb5ce5899fcfe5481456",
 };
 
 const stakingContractAddresses: Map = {
-  1: "0xe3d143d7b864f2d0f76f9080d758ded8ca262b26",
+  42161: "0xe3d143d7b864f2d0f76f9080d758ded8ca262b26",
 };
 
 export default function Allowance() {
@@ -39,7 +39,7 @@ export default function Allowance() {
     abi: ABI,
     functionName: "approve",
     args: [
-      stakingContractAddresses[chain?.id || 1],
+      stakingContractAddresses[chain?.id || 42161],
       ethers.constants.MaxUint256,
     ],
   });

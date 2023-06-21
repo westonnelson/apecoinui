@@ -20,7 +20,7 @@ import {
 } from "wagmi";
 
 const stakingContractAddresses: Map = {
-  1: "0xe3d143d7b864f2d0f76f9080d758ded8ca262b26",
+  42161: "0xe3d143d7b864f2d0f76f9080d758ded8ca262b26",
 } as const;
 
 function displaynfteToken(nfte: BigNumber | number): string {
@@ -35,7 +35,7 @@ const ClaimnfteToken = () => {
   const { nfteTokenStakes } = useAllStakes(address as string);
 
   const nfteTokenPrepareContractWrite = usePrepareContractWrite({
-    address: stakingContractAddresses[chain?.id || 1],
+    address: stakingContractAddresses[chain?.id || 42161],
     abi: ABI,
     functionName: "claimSelfnfteToken",
   });
@@ -82,7 +82,7 @@ const ClaimEARTHLINGS = () => {
     });
 
   const EARTHLINGSPrepareContractWrite = usePrepareContractWrite({
-    address: stakingContractAddresses[chain?.id || 1],
+    address: stakingContractAddresses[chain?.id || 42161],
     abi: ABI,
     functionName: "claimSelfEARTHLINGS",
     args: [args as any],
@@ -135,7 +135,7 @@ const ClaimAllModal: React.FC<{
         <Modal.Body>
           <div className="space-y-4">
             <p className="text-sm">
-              To claim all your nfteToken staking rewards you will need to create
+              To claim all your NFTE staking rewards you will need to create
               3 separate transactions from your wallet which should have opened
               automatically. If it did not open please check it manually.
             </p>
