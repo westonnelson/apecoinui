@@ -10,17 +10,15 @@ import {
   useWaitForTransaction,
 } from "wagmi";
 
-import ABI from "@/abis/nfte";
+import ABI from "@/abis/nftetoken";
 import { Map } from "@/types/map";
 
 const nfteTokenContractAddresses: Map = {
-  1: "0x3f770ac673856f105b586bb393d122721265ad46",
-  5: "0x328507DC29C95c170B56a1b3A758eB7a9E73455c",
+  1: "0xb261104a83887ae92392fb5ce5899fcfe5481456",
 };
 
 const stakingContractAddresses: Map = {
   1: "0xe3d143d7b864f2d0f76f9080d758ded8ca262b26",
-  5: "0xeF37717B1807a253c6D140Aca0141404D23c26D4",
 };
 
 export default function Allowance() {
@@ -29,15 +27,15 @@ export default function Allowance() {
 
   const allowanceContractRead = useContractRead({
     enabled: address !== undefined,
-    address: apecoinContractAddresses[chain?.id || 1],
+    address: nfteTokenContractAddresses[chain?.id || 42161],
     abi: ABI,
     functionName: "allowance",
-    args: [address as `0x${string}`, stakingContractAddresses[chain?.id || 1]],
+    args: [address as `0x${string}`, stakingContractAddresses[chain?.id || 42161]],
   });
 
   const { config } = usePrepareContractWrite({
     enabled: isConnected && allowanceContractRead.isSuccess,
-    address: apecoinContractAddresses[chain?.id || 1],
+    address: nfteTokenContractAddresses[chain?.id || 42161],
     abi: ABI,
     functionName: "approve",
     args: [
@@ -70,7 +68,7 @@ export default function Allowance() {
           contractWrite.write?.();
         }}
       >
-        Approve ApeCoin Staking Unlimited Allowance
+        Approve NFTE Staking Unlimited Allowance
       </button>
     </>
   );

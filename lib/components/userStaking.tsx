@@ -29,8 +29,8 @@ function ClaimAll({
 }: {
   chain: (Chain & { unsupported?: boolean | undefined }) | undefined;
   nfteTokenStakes: poolStakesData[] | undefined;
-  earthlingsStake: poolStakesData[] | undefined;
-  roboroversStake: poolStakesData[] | undefined;
+  earthlingsStakes: poolStakesData[] | undefined;
+  roboroversStakes: poolStakesData[] | undefined;
   nfw3cStakes: poolStakesData[] | undefined;
 }) {
   const nfteTokenClaimPrepareContractWrite = usePrepareContractWrite({
@@ -38,7 +38,7 @@ function ClaimAll({
       nfteTokenStakes &&
       nfteTokenStakes.length !== 0 &&
       !nfteTokenStakes[0].unclaimed.isZero(),
-    address: stakingContractAddresses[chain?.id || 1],
+    address: stakingContractAddresses[chain?.id || 42161],
     abi: ABI,
     functionName: "claimSelfnfteToken",
   });
@@ -64,7 +64,7 @@ function ClaimAll({
 
   const earthlingsPrepareContractWrite = usePrepareContractWrite({
     enabled: earthlingsStakes && earthlingsStakes.length > 0 && earthlingsUnclaimed > 0,
-    address: stakingContractAddresses[chain?.id || 1],
+    address: stakingContractAddresses[chain?.id || 42161],
     abi: ABI,
     functionName: "claimSelfearthlings",
     args: args && ([args] as any),
@@ -84,7 +84,7 @@ function ClaimAll({
 
   const roboroversPrepareContractWrite = usePrepareContractWrite({
     enabled: roboroversStakes && roboroversStakes.length > 0,
-    address: stakingContractAddresses[chain?.id || 1],
+    address: stakingContractAddresses[chain?.id || 42161],
     abi: ABI,
     functionName: "claimSelfroborovers",
     args: [roboroversArgs as any],
@@ -126,7 +126,7 @@ function ClaimAll({
 
   const nfw3cPrepareContractWrite = usePrepareContractWrite({
     enabled: nfw3cearthlingsArgs.length > 0 || nfw3croboroversArgs.length > 0,
-    address: stakingContractAddresses[chain?.id || 1],
+    address: stakingContractAddresses[chain?.id || 42161],
     abi: ABI,
     functionName: "claimSelfnfw3c",
     args: [nfw3cearthlingsArgs, nfw3croboroversArgs],
@@ -154,27 +154,27 @@ function ClaimAll({
 
 function WithdrawAll({
   chain,
-  apeCoinStakes,
+  nfteTokenStakes,
   earthlingsStakes,
   roboroversStakes,
   nfw3cStakes,
 }: {
   chain: (Chain & { unsupported?: boolean | undefined }) | undefined;
-  apeCoinStakes: poolStakesData[] | undefined;
+  nfteTokenStakes: poolStakesData[] | undefined;
   earthlingsStakes: poolStakesData[] | undefined;
   roboroversStakes: poolStakesData[] | undefined;
   nfw3cStakes: poolStakesData[] | undefined;
 }) {
-  const apeCoinWithdrawPrepareContractWrite = usePrepareContractWrite({
-    enabled: !apeCoinStakes?.[0]?.deposited.isZero(),
-    address: stakingContractAddresses[chain?.id || 1],
+  const nfteTokenWithdrawPrepareContractWrite = usePrepareContractWrite({
+    enabled: !nfteTokenStakes?.[0]?.deposited.isZero(),
+    address: stakingContractAddresses[chain?.id || 42161],
     abi: ABI,
-    functionName: "withdrawSelfApeCoin",
-    args: apeCoinStakes?.[0]?.deposited && [apeCoinStakes[0].deposited],
+    functionName: "withdrawSelfnfteToken",
+    args: nfteTokenStakes?.[0]?.deposited && [nfteTokenStakes[0].deposited],
   });
 
-  const apeCoinWithdrawContractWrite = useContractWrite(
-    apeCoinWithdrawPrepareContractWrite.config
+  const nfteTokenWithdrawContractWrite = useContractWrite(
+    nfteTokenWithdrawPrepareContractWrite.config
   );
 
   interface withdrawData {
@@ -198,7 +198,7 @@ function WithdrawAll({
 
   const earthlingsWithdrawPrepareContractWrite = usePrepareContractWrite({
     enabled: earthlingsStakes && earthlingsStakes.length > 0,
-    address: stakingContractAddresses[chain?.id || 1],
+    address: stakingContractAddresses[chain?.id || 42161],
     abi: ABI,
     functionName: "withdrawSelfearthlings",
     args: earthlingsWithdrawArgs && ([earthlingsWithdrawArgs] as any),
@@ -224,7 +224,7 @@ function WithdrawAll({
 
   const roboroversWithdrawPrepareContractWrite = usePrepareContractWrite({
     enabled: roboroversStakes && roboroversStakes.length > 0,
-    address: stakingContractAddresses[chain?.id || 1],
+    address: stakingContractAddresses[chain?.id || 42161],
     abi: ABI,
     functionName: "withdrawSelfroborovers",
     args: roboroversWithdrawArgs && ([roboroversWithdrawArgs] as any),
@@ -274,7 +274,7 @@ function WithdrawAll({
 
   const nfw3cPrepareContractWrite = usePrepareContractWrite({
     enabled: nfw3cearthlingsArgs.length > 0 || nfw3croboroversArgs.length > 0,
-    address: stakingContractAddresses[chain?.id || 1],
+    address: stakingContractAddresses[chain?.id || 42161],
     abi: ABI,
     functionName: "withdrawnfw3c",
     args: [nfw3cearthlingsArgs, nfw3croboroversArgs],
@@ -285,8 +285,8 @@ function WithdrawAll({
     <div>
       <button
         onClick={() => {
-          if (apeCoinStakes?.[0]?.unclaimed.gt(0)) {
-            apeCoinWithdrawContractWrite.write?.();
+          if (nfteTokenStakes?.[0]?.unclaimed.gt(0)) {
+            nfteTokenWithdrawContractWrite.write?.();
           }
           earthlingsWithdrawContractWrite.write?.();
           roboroversWithdrawContractWrite.write?.();
@@ -313,7 +313,7 @@ export default function UserStaking() {
 
   const {
     poolsContractRead: allStakes,
-    apeCoinStakes,
+    nfteTokenStakes,
     earthlingsStakes,
     roboroversStakes,
     nfw3cStakes,
@@ -327,7 +327,7 @@ export default function UserStaking() {
     return sum + +formatUnits(stake.unclaimed);
   }, 0);
 
-  const apecoinPriceNumber = apecoinPrice && +formatUnits(apecoinPrice, 8);
+  const nfteTokenPriceNumber = nfteTokenPrice && +formatUnits(nfteTokenPrice, 8);
 
   return (
     <>
@@ -367,7 +367,7 @@ export default function UserStaking() {
                   {Intl.NumberFormat("en-US", {
                     maximumFractionDigits: 4,
                   }).format(totalStaked)}
-                  {totalStaked && apecoinPriceNumber && (
+                  {totalStaked && nfteTokenPriceNumber && (
                     <>
                       {" "}
                       (
@@ -377,7 +377,7 @@ export default function UserStaking() {
                         currency: "USD",
                         notation: "compact",
                         compactDisplay: "short",
-                      }).format(totalStaked * apecoinPriceNumber)}
+                      }).format(totalStaked * nfteTokenPriceNumber)}
                       )
                     </>
                   )}
@@ -386,7 +386,7 @@ export default function UserStaking() {
                   process.env.NEXT_PUBLIC_ENABLE_STAKE === "TRUE" && (
                     <WithdrawAll
                       chain={chain}
-                      apeCoinStakes={apeCoinStakes}
+                      nfteTokenStakes={nfteTokenStakes}
                       earthlingsStakes={earthlingsStakes}
                       roboroversStakes={roboroversStakes}
                       nfw3cStakes={nfw3cStakes}
@@ -411,7 +411,7 @@ export default function UserStaking() {
                 {Intl.NumberFormat("en-US", {
                   maximumFractionDigits: 4,
                 }).format(totalUnclaimed)}
-                {totalUnclaimed && apecoinPriceNumber && (
+                {totalUnclaimed && nfteTokenPriceNumber && (
                   <>
                     {" "}
                     (
@@ -420,7 +420,7 @@ export default function UserStaking() {
                       currency: "USD",
                       notation: "compact",
                       compactDisplay: "short",
-                    }).format(totalUnclaimed * apecoinPriceNumber)}
+                    }).format(totalUnclaimed * nfteTokenPriceNumber)}
                     )
                   </>
                 )}
@@ -428,7 +428,7 @@ export default function UserStaking() {
                   process.env.NEXT_PUBLIC_ENABLE_STAKE === "TRUE" && (
                     <ClaimAll
                       chain={chain}
-                      nfteTokenStakes={apeCoinStakes}
+                      nfteTokenStakes={nfteTokenStakes}
                       earthlingsStakes={earthlingsStakes}
                       roboroversStakes={roboroversStakes}
                       nfw3cStakes={nfw3cStakes}

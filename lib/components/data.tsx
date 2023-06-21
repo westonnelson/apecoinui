@@ -17,13 +17,13 @@ export default function Data() {
   const { amount: selectedAmount } = useAmount();
 
   const poolData = usePoolData();
-  const { apecoinPrice } = usePrice();
+  const { nfteTokenPrice } = usePrice();
 
-  const apecoinPriceHumanNumber = apecoinPrice && +formatUnits(apecoinPrice, 8);
+  const nfteTokenPriceHumanNumber = nfteTokenPrice && +formatUnits(nfteTokenPrice, 8);
   const rewardHeader =
     selectedAmount === Amount.PerApe
-      ? "ApeCoin Reward Per ApeCoin Staked"
-      : "ApeCoin Reward With 1 Max Staked NFT";
+      ? "NFTE REWARD PER NFTE STAKE"
+      : "NFTE Reward With 1 Max Staked NFT";
 
   const rewardMultiplier = (pool: number): number => {
     if (selectedAmount === Amount.PerApe) return 1;
@@ -128,7 +128,7 @@ export default function Data() {
                   <td className="flex w-1/4 flex-wrap items-center p-4">
                     {poolData.poolData[pool].rewardPerHour &&
                     poolData.poolData[pool].rewardPerDay &&
-                    apecoinPriceHumanNumber ? (
+                    nfteTokenPriceHumanNumber ? (
                       <>
                         {isNaN(rewardMultiplier(pool)) ? (
                           <>Pool has no maximum</>
@@ -150,7 +150,7 @@ export default function Data() {
                               timeFrameHourMultiplier *
                                 poolData.poolData[pool].rewardPerHour! *
                                 rewardMultiplier(pool) *
-                                apecoinPriceHumanNumber
+                                nfteTokenPriceHumanNumber
                             )}
                             )
                           </>

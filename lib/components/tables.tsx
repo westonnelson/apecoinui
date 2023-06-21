@@ -2,7 +2,7 @@
 
 import { formatUnits, parseUnits } from "ethers/lib/utils.js";
 import { ethers, BigNumber } from "ethers";
-import useApeCoinBalance from "@/hooks/useApeCoinBalance";
+import usenfteTokenBalance from "@/hooks/usenfteTokenBalance";
 import { useState } from "react";
 
 const MAX_STAKES = {
@@ -20,14 +20,14 @@ interface poolStakesData {
   pair: { mainTokenId: BigNumber; mainTypePoolId: BigNumber };
 }
 
-export function ApeCoinTable({
-  apeCoinStakes,
-  apecoinPrice,
+export function NFTEarthTable({
+  nfteTokenStakes,
+  nfteTokenPrice,
   withdrawArgs,
   claimArgs,
 }: {
-  apeCoinStakes: poolStakesData[];
-  apecoinPrice: BigNumber | undefined;
+  nfteTokenStakes: poolStakesData[];
+  nfteTokenPrice: BigNumber | undefined;
   withdrawArgs: (
     poolID: number,
     asString: boolean
@@ -45,19 +45,19 @@ export function ApeCoinTable({
     asString: boolean
   ) => string | ethers.BigNumber | (number | undefined)[] | undefined;
 }) {
-  const { apeCoinBalance } = useApeCoinBalance();
+  const { nfteTokenBalance } = usenfteTokenBalance();
 
-  const [depositApeCoinAmount, setDepositApeCoinAmount] = useState<BigNumber>(
+  const [depositnfteTokenAmount, setDepositnfteTokenAmount] = useState<BigNumber>(
     ethers.constants.Zero
   );
 
   const depositedTotal =
-    apeCoinStakes?.reduce((total, token) => {
+    nfteTokenStakes?.reduce((total, token) => {
       return total.add(token.deposited);
     }, ethers.constants.Zero) || 0;
 
   const unclaimedTotal =
-    apeCoinStakes?.reduce((total, token) => {
+    nfteTokenStakes?.reduce((total, token) => {
       return total.add(token.unclaimed);
     }, ethers.constants.Zero) || 0;
 
@@ -69,49 +69,49 @@ export function ApeCoinTable({
             Token ID
           </th>
           <th className="flex w-1/4 items-center p-4 text-left font-semibold tracking-wide">
-            Deposit ApeCoin
+            Deposit nfteToken
           </th>
           <th className="flex w-1/4 items-center p-4 text-left font-semibold tracking-wide">
-            Staked ApeCoin
+            Staked nfteToken
           </th>
           <th className="flex w-1/4 items-center p-4 text-left font-semibold tracking-wide">
-            Unclaimed ApeCoin
+            Unclaimed nfteToken
           </th>
         </tr>
       </thead>
       <tbody className="divide-y divide-zinc-200 dark:divide-zinc-700">
-        {apeCoinStakes.map((stake, i) => (
+        {nfteTokenStakes.map((stake, i) => (
           <tr className="flex" key={i}>
             <td className="flex w-1/4 flex-wrap items-center gap-2 p-4">
-              ApeCoin
+              nfteToken
             </td>
             <td className="flex w-1/4 flex-wrap items-center gap-2 p-4">
               <input
-                value={Math.round(+formatUnits(depositApeCoinAmount || 0))}
+                value={Math.round(+formatUnits(depositnfteTokenAmount || 0))}
                 onChange={(e) => {
                   if (e.target.value === "") {
-                    setDepositApeCoinAmount(ethers.constants.Zero);
+                    setDepositnfteTokenAmount(ethers.constants.Zero);
                   } else if (!isNaN(+e.target.value)) {
-                    setDepositApeCoinAmount(parseUnits(e.target.value));
+                    setDepositnfteTokenAmount(parseUnits(e.target.value));
                   }
                 }}
                 className="w-2/5 border px-2 dark:border-zinc-500 dark:bg-zinc-800"
               />
-              {apeCoinBalance?.gt(0) &&
-                !depositApeCoinAmount.eq(apeCoinBalance) && (
+              {nfteTokenBalance?.gt(0) &&
+                !depositnfteTokenAmount.eq(nfteTokenBalance) && (
                   <button
                     onClick={() => {
-                      setDepositApeCoinAmount(apeCoinBalance!);
+                      setDepositnfteTokenAmount(nfteTokenBalance!);
                     }}
                   >
                     MAX
                   </button>
                 )}
 
-              {depositApeCoinAmount.gt(0) && (
+              {depositnfteTokenAmount.gt(0) && (
                 <button
                   onClick={() => {
-                    setDepositApeCoinAmount(ethers.constants.Zero);
+                    setDepositnfteTokenAmount(ethers.constants.Zero);
                   }}
                 >
                   CLEAR
@@ -120,7 +120,7 @@ export function ApeCoinTable({
             </td>
             <td className="flex w-1/4 flex-wrap items-center gap-2 p-4">
               {Intl.NumberFormat("en-us").format(+formatUnits(stake.deposited))}
-              {apecoinPrice && (
+              {nfteTokenPrice && (
                 <>
                   {" "}
                   (
@@ -132,7 +132,7 @@ export function ApeCoinTable({
                     compactDisplay: "short",
                   }).format(
                     +formatUnits(stake.deposited) *
-                      +formatUnits(apecoinPrice, 8)
+                      +formatUnits(nfteTokenPrice, 8)
                   )}
                   )
                 </>
@@ -143,7 +143,7 @@ export function ApeCoinTable({
                 notation: "compact",
                 compactDisplay: "short",
               }).format(+formatUnits(stake.unclaimed))}
-              {apecoinPrice && (
+              {nfteTokenPrice && (
                 <>
                   {" "}
                   (
@@ -155,7 +155,7 @@ export function ApeCoinTable({
                     compactDisplay: "short",
                   }).format(
                     +formatUnits(stake.unclaimed) *
-                      +formatUnits(apecoinPrice, 8)
+                      +formatUnits(nfteTokenPrice, 8)
                   )}
                   )
                 </>
@@ -166,14 +166,14 @@ export function ApeCoinTable({
 
         {(depositedTotal.gt(0) ||
           unclaimedTotal.gt(0) ||
-          depositApeCoinAmount.gt(0)) && (
+          depositnfteTokenAmount.gt(0)) && (
           <>
             <tr className="flex">
               <td className="flex w-1/4 flex-wrap items-center gap-2 p-4">
                 Transaction:
               </td>
               <td className="flex w-1/4 flex-wrap items-center gap-2 p-4">
-                {depositApeCoinAmount.gt(0) && (
+                {depositnfteTokenAmount.gt(0) && (
                   <button className="border px-2 hover:border-zinc-500 dark:border-zinc-500 dark:bg-zinc-800 dark:hover:border-zinc-300">
                     Deposit
                   </button>
@@ -200,16 +200,16 @@ export function ApeCoinTable({
                 Etherscan Contract:
               </td>
               <td className="flex w-1/4 flex-wrap items-center gap-2 p-4">
-                {depositApeCoinAmount.gt(0) && (
+                {depositnfteTokenAmount.gt(0) && (
                   <>
                     <a
                       className="text-sm text-[#1da1f2] sm:text-base"
                       href={`https://etherscan.io/address/0x5954aB967Bc958940b7EB73ee84797Dc8a2AFbb9#writeContract#F14`}
                     >
-                      depositSelfApeCoin
+                      depositSelfnfteToken
                     </a>
                     <textarea
-                      value={`"${depositApeCoinAmount?.toString()}"`}
+                      value={`"${depositnfteTokenAmount?.toString()}"`}
                       className="w-full border px-2 text-[10px] dark:border-zinc-500 dark:bg-zinc-800"
                     />
                   </>
@@ -222,7 +222,7 @@ export function ApeCoinTable({
                       className="text-sm text-[#1da1f2] sm:text-base"
                       href={`https://etherscan.io/address/0x5954aB967Bc958940b7EB73ee84797Dc8a2AFbb9#writeContract#F23`}
                     >
-                      withdrawSelfApeCoin
+                      withdrawSelfnfteToken
                     </a>
                     <textarea
                       className="w-full border px-2 text-[10px] dark:border-zinc-500 dark:bg-zinc-800"
@@ -239,7 +239,7 @@ export function ApeCoinTable({
                       className="text-sm text-[#1da1f2] sm:text-base"
                       href={`https://etherscan.io/address/0x5954aB967Bc958940b7EB73ee84797Dc8a2AFbb9#writeContract#F14`}
                     >
-                      claimSelfApeCoin
+                      claimSelfnfteToken
                     </a>
                     <textarea
                       className="w-full border px-2 text-[10px] dark:border-zinc-500 dark:bg-zinc-800"
@@ -261,7 +261,7 @@ export function NftTable({
   poolId,
   tokenSymbol,
   poolStakes,
-  apecoinPrice,
+  nfteTokenPrice,
   withdrawArgs,
   claimArgs,
   depositFunctionID,
@@ -274,7 +274,7 @@ export function NftTable({
   withdrawFunctionID: string;
   depositFunctionID: string;
   poolStakes: poolStakesData[];
-  apecoinPrice: BigNumber | undefined;
+  nfteTokenPrice: BigNumber | undefined;
   withdrawArgs: (
     poolID: number,
     asString: boolean
@@ -339,13 +339,13 @@ export function NftTable({
             Token ID
           </th>
           <th className="flex w-1/4 items-center p-4 text-left font-semibold tracking-wide">
-            Deposit ApeCoin
+            Deposit nfteToken
           </th>
           <th className="flex w-1/4 items-center p-4 text-left font-semibold tracking-wide">
-            Staked ApeCoin
+            Staked nfteToken
           </th>
           <th className="flex w-1/4 items-center p-4 text-left font-semibold tracking-wide">
-            Unclaimed ApeCoin
+            Unclaimed nfteToken
           </th>
         </tr>
       </thead>
@@ -423,7 +423,7 @@ export function NftTable({
             </td>
             <td className="flex w-1/4 flex-wrap items-center gap-2 p-4">
               {Intl.NumberFormat("en-us").format(+formatUnits(stake.deposited))}
-              {apecoinPrice && (
+              {nfteTokenPrice && (
                 <>
                   {" "}
                   (
@@ -435,7 +435,7 @@ export function NftTable({
                     compactDisplay: "short",
                   }).format(
                     +formatUnits(stake.deposited) *
-                      +formatUnits(apecoinPrice, 8)
+                      +formatUnits(nfteTokenPrice, 8)
                   )}
                   )
                 </>
@@ -443,7 +443,7 @@ export function NftTable({
             </td>
             <td className="flex w-1/4 flex-wrap items-center gap-2 p-4">
               {Intl.NumberFormat("en-us").format(+formatUnits(stake.unclaimed))}
-              {apecoinPrice && (
+              {nfteTokenPrice && (
                 <>
                   {" "}
                   (
@@ -455,7 +455,7 @@ export function NftTable({
                     compactDisplay: "short",
                   }).format(
                     +formatUnits(stake.unclaimed) *
-                      +formatUnits(apecoinPrice, 8)
+                      +formatUnits(nfteTokenPrice, 8)
                   )}
                   )
                 </>
@@ -476,7 +476,7 @@ export function NftTable({
                 {Intl.NumberFormat("en-us").format(
                   +formatUnits(totalToDeposit)
                 )}
-                {apecoinPrice && (
+                {nfteTokenPrice && (
                   <>
                     {" "}
                     (
@@ -488,7 +488,7 @@ export function NftTable({
                       compactDisplay: "short",
                     }).format(
                       +formatUnits(totalToDeposit) *
-                        +formatUnits(apecoinPrice, 8)
+                        +formatUnits(nfteTokenPrice, 8)
                     )}
                     )
                   </>
@@ -498,7 +498,7 @@ export function NftTable({
                 {Intl.NumberFormat("en-us").format(
                   +formatUnits(depositedTotal)
                 )}
-                {apecoinPrice && (
+                {nfteTokenPrice && (
                   <>
                     {" "}
                     (
@@ -510,7 +510,7 @@ export function NftTable({
                       compactDisplay: "short",
                     }).format(
                       +formatUnits(depositedTotal) *
-                        +formatUnits(apecoinPrice, 8)
+                        +formatUnits(nfteTokenPrice, 8)
                     )}
                     )
                   </>
@@ -520,7 +520,7 @@ export function NftTable({
                 {Intl.NumberFormat("en-us").format(
                   +formatUnits(unclaimedTotal)
                 )}
-                {apecoinPrice && (
+                {nfteTokenPrice && (
                   <>
                     {" "}
                     (
@@ -532,7 +532,7 @@ export function NftTable({
                       compactDisplay: "short",
                     }).format(
                       +formatUnits(unclaimedTotal) *
-                        +formatUnits(apecoinPrice, 8)
+                        +formatUnits(nfteTokenPrice, 8)
                     )}
                     )
                   </>
@@ -630,15 +630,15 @@ export function NftTable({
   );
 }
 
-export function BakcTable({
+export function nfw3cTable({
   poolStakes,
-  apecoinPrice,
+  nfteTokenPrice,
   withdrawArgs,
   claimArgs,
   pairOptions,
 }: {
   poolStakes: poolStakesData[];
-  apecoinPrice: BigNumber | undefined;
+  nfteTokenPrice: BigNumber | undefined;
   pairOptions: { label: string }[];
   withdrawArgs: (
     mainTypePoolId: number,
@@ -648,7 +648,7 @@ export function BakcTable({
         | (string | number)[]
         | {
             mainTokenId: ethers.BigNumber;
-            bakcTokenId: ethers.BigNumber;
+            nfw3cTokenId: ethers.BigNumber;
             amount: ethers.BigNumber;
             isUncommit: boolean;
           }[]
@@ -689,13 +689,13 @@ export function BakcTable({
             Token ID
           </th>
           <th className="flex w-1/4 items-center p-4 text-left font-semibold tracking-wide">
-            Deposit ApeCoin
+            Deposit nfteToken
           </th>
           <th className="flex w-1/4 items-center p-4 text-left font-semibold tracking-wide">
-            Staked ApeCoin
+            Staked nfteToken
           </th>
           <th className="flex w-1/4 items-center p-4 text-left font-semibold tracking-wide">
-            Unclaimed ApeCoin
+            Unclaimed nfteToken
           </th>
         </tr>
       </thead>
@@ -703,7 +703,7 @@ export function BakcTable({
         {poolStakes.map((stake, i) => (
           <tr className="flex" key={i}>
             <td className="flex w-1/4 flex-wrap items-center gap-2 p-4">
-              BAKC {stake.tokenId.toNumber()}
+              nfw3c {stake.tokenId.toNumber()}
               <select className="h-7 w-1/2 appearance-none border px-2 py-0 dark:border-zinc-500 dark:bg-zinc-800">
                 <option>PAIR WITH</option>
                 {pairOptions.map((option) => (
@@ -717,7 +717,7 @@ export function BakcTable({
             </td>
             <td className="flex w-1/4 flex-wrap items-center gap-2 p-4">
               {Intl.NumberFormat("en-us").format(+formatUnits(stake.deposited))}
-              {apecoinPrice && (
+              {nfteTokenPrice && (
                 <>
                   {" "}
                   (
@@ -729,7 +729,7 @@ export function BakcTable({
                     compactDisplay: "short",
                   }).format(
                     +formatUnits(stake.deposited) *
-                      +formatUnits(apecoinPrice, 8)
+                      +formatUnits(nfteTokenPrice, 8)
                   )}
                   )
                 </>
@@ -737,7 +737,7 @@ export function BakcTable({
             </td>
             <td className="flex w-1/4 flex-wrap items-center gap-2 p-4">
               {Intl.NumberFormat("en-us").format(+formatUnits(stake.unclaimed))}
-              {apecoinPrice && (
+              {nfteTokenPrice && (
                 <>
                   {" "}
                   (
@@ -749,7 +749,7 @@ export function BakcTable({
                     compactDisplay: "short",
                   }).format(
                     +formatUnits(stake.unclaimed) *
-                      +formatUnits(apecoinPrice, 8)
+                      +formatUnits(nfteTokenPrice, 8)
                   )}
                   )
                 </>
@@ -766,7 +766,7 @@ export function BakcTable({
               </td>
               <td className="flex w-1/4 flex-wrap items-center gap-2 p-4">
                 1,712
-                {apecoinPrice && (
+                {nfteTokenPrice && (
                   <>
                     {" "}
                     (
@@ -776,7 +776,7 @@ export function BakcTable({
                       currency: "USD",
                       notation: "compact",
                       compactDisplay: "short",
-                    }).format(1712 * +formatUnits(apecoinPrice, 8))}
+                    }).format(1712 * +formatUnits(nfteTokenPrice, 8))}
                     )
                   </>
                 )}
@@ -785,7 +785,7 @@ export function BakcTable({
                 {Intl.NumberFormat("en-us").format(
                   +formatUnits(depositedTotal)
                 )}
-                {apecoinPrice && (
+                {nfteTokenPrice && (
                   <>
                     {" "}
                     (
@@ -797,7 +797,7 @@ export function BakcTable({
                       compactDisplay: "short",
                     }).format(
                       +formatUnits(depositedTotal) *
-                        +formatUnits(apecoinPrice, 8)
+                        +formatUnits(nfteTokenPrice, 8)
                     )}
                     )
                   </>
@@ -807,7 +807,7 @@ export function BakcTable({
                 {Intl.NumberFormat("en-us").format(
                   +formatUnits(unclaimedTotal)
                 )}
-                {apecoinPrice && (
+                {nfteTokenPrice && (
                   <>
                     {" "}
                     (
@@ -819,7 +819,7 @@ export function BakcTable({
                       compactDisplay: "short",
                     }).format(
                       +formatUnits(unclaimedTotal) *
-                        +formatUnits(apecoinPrice, 8)
+                        +formatUnits(nfteTokenPrice, 8)
                     )}
                     )
                   </>
@@ -857,15 +857,15 @@ export function BakcTable({
                   className="text-sm text-[#1da1f2] sm:text-base"
                   href={`https://etherscan.io/address/0x5954aB967Bc958940b7EB73ee84797Dc8a2AFbb9#writeContract#F12`}
                 >
-                  depositBAKC
+                  depositnfw3c
                 </a>
-                <p className="mt-4 text-sm">_baycPairs</p>
+                <p className="mt-4 text-sm">_earthlingsPairs</p>
                 <textarea
                   className="w-full border px-2 text-[10px] dark:border-zinc-500 dark:bg-zinc-800"
                   readOnly
                   value={JSON.stringify(withdrawArgs(1, true))}
                 />
-                <p className="text-sm">_maycPairs</p>
+                <p className="text-sm">_roboroversPairs</p>
                 <textarea
                   className="w-full border px-2 text-[10px] dark:border-zinc-500 dark:bg-zinc-800"
                   readOnly
@@ -877,15 +877,15 @@ export function BakcTable({
                   className="text-sm text-[#1da1f2] sm:text-base"
                   href={`https://etherscan.io/address/0x5954aB967Bc958940b7EB73ee84797Dc8a2AFbb9#writeContract#F20`}
                 >
-                  withdrawBAKC
+                  withdrawnfw3c
                 </a>
-                <p className="mt-4 text-sm">_baycPairs</p>
+                <p className="mt-4 text-sm">_earthlingsPairs</p>
                 <textarea
                   className="w-full border px-2 text-[10px] dark:border-zinc-500  dark:bg-zinc-800"
                   readOnly
                   value={JSON.stringify(withdrawArgs(1, true))}
                 />
-                <p className="text-sm">_maycPairs</p>
+                <p className="text-sm">_roboroversPairs</p>
                 <textarea
                   className="w-full border px-2 text-[10px] dark:border-zinc-500 dark:bg-zinc-800"
                   readOnly
@@ -897,15 +897,15 @@ export function BakcTable({
                   className="text-sm text-[#1da1f2] sm:text-base"
                   href={`https://etherscan.io/address/0x5954aB967Bc958940b7EB73ee84797Dc8a2AFbb9#writeContract#F7`}
                 >
-                  claimBAKC
+                  claimnfw3c
                 </a>
-                <p className="mt-4 text-sm">_baycPairs</p>
+                <p className="mt-4 text-sm">_earthlingsPairs</p>
                 <textarea
                   className="w-full border px-2 text-[10px] dark:border-zinc-500 dark:bg-zinc-800"
                   readOnly
                   value={JSON.stringify(claimArgs(1, true))}
                 />
-                <p className="text-sm">_maycPairs</p>
+                <p className="text-sm">_roboroversPairs</p>
                 <textarea
                   className="w-full border px-2 text-[10px] dark:border-zinc-500 dark:bg-zinc-800"
                   readOnly
