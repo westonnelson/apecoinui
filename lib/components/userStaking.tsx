@@ -17,7 +17,7 @@ import { Map } from "@/types/map";
 import { BigNumber } from "ethers";
 
 const stakingContractAddresses: Map = {
-  1: "0xe3d143d7b864f2d0f76f9080d758ded8ca262b26",
+  42161: "0xe3d143d7b864f2d0f76f9080d758ded8ca262b26",
 } as const;
 
 function ClaimAll({
@@ -303,7 +303,7 @@ function WithdrawAll({
 export default function UserStaking() {
   const { chain } = useNetwork();
   const { address } = useAccount();
-  const { nftearthPrice } = usePrice();
+  const { nfteTokenPrice } = usePrice();
   const [statsAddress, setStatsAddress] = useState<string>("");
   useEffect(() => {
     if (address) {

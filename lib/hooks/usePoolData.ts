@@ -6,7 +6,7 @@ import { Map } from "@/types/map";
 import { PoolData } from "@/types/data";
 
 const stakingContractAddresses: Map = {
-  1: "0xe3d143d7b864f2d0f76f9080d758ded8ca262b26",
+  42161: "0xe3d143d7b864f2d0f76f9080d758ded8ca262b26",
 
 } as const;
 
@@ -21,7 +21,7 @@ function usePoolData(): {
   const { chain } = useNetwork();
 
   const poolsContractRead = useContractRead({
-    address: stakingContractAddresses[chain?.id || 1],
+    address: stakingContractAddresses[chain?.id || 42161],
     abi: StakingABI,
     functionName: "getPoolsUI",
     watch: true,

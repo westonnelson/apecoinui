@@ -69,13 +69,13 @@ export function NFTEarthTable({
             Token ID
           </th>
           <th className="flex w-1/4 items-center p-4 text-left font-semibold tracking-wide">
-            Deposit nfteToken
+            Deposit NFTE
           </th>
           <th className="flex w-1/4 items-center p-4 text-left font-semibold tracking-wide">
-            Staked nfteToken
+            Staked NFTE
           </th>
           <th className="flex w-1/4 items-center p-4 text-left font-semibold tracking-wide">
-            Unclaimed nfteToken
+            Unclaimed NFTE
           </th>
         </tr>
       </thead>
@@ -83,7 +83,7 @@ export function NFTEarthTable({
         {nfteTokenStakes.map((stake, i) => (
           <tr className="flex" key={i}>
             <td className="flex w-1/4 flex-wrap items-center gap-2 p-4">
-              nfteToken
+              NFTE
             </td>
             <td className="flex w-1/4 flex-wrap items-center gap-2 p-4">
               <input
@@ -339,13 +339,13 @@ export function NftTable({
             Token ID
           </th>
           <th className="flex w-1/4 items-center p-4 text-left font-semibold tracking-wide">
-            Deposit nfteToken
+            Deposit NFTE
           </th>
           <th className="flex w-1/4 items-center p-4 text-left font-semibold tracking-wide">
-            Staked nfteToken
+            Staked NFTE
           </th>
           <th className="flex w-1/4 items-center p-4 text-left font-semibold tracking-wide">
-            Unclaimed nfteToken
+            Unclaimed NFTE
           </th>
         </tr>
       </thead>

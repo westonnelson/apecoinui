@@ -58,7 +58,7 @@ const useEvents = () => {
         hash: args[3].transactionHash,
       });
     },
-    chainId: 1,
+    chainId: 42161,
   });
 
   useContractEvent({
@@ -74,7 +74,7 @@ const useEvents = () => {
         hash: args[4].transactionHash,
       });
     },
-    chainId: 1,
+    chainId: 42161,
   });
 
   useContractEvent({
@@ -90,7 +90,7 @@ const useEvents = () => {
         hash: args[5].transactionHash,
       });
     },
-    chainId: 1,
+    chainId: 42161,
   });
 
   useContractEvent({
@@ -106,7 +106,7 @@ const useEvents = () => {
         hash: args[3].transactionHash,
       });
     },
-    chainId: 1,
+    chainId: 42161,
   });
 
   useContractEvent({
@@ -122,7 +122,7 @@ const useEvents = () => {
         hash: args[5].transactionHash,
       });
     },
-    chainId: 1,
+    chainId: 42161,
   });
 
   useContractEvent({
@@ -138,7 +138,7 @@ const useEvents = () => {
         hash: args[5].transactionHash,
       });
     },
-    chainId: 1,
+    chainId: 42161,
   });
 
   useContractEvent({
@@ -154,7 +154,7 @@ const useEvents = () => {
         hash: args[3].transactionHash,
       });
     },
-    chainId: 1,
+    chainId: 42161,
   });
 
   useContractEvent({
@@ -170,7 +170,7 @@ const useEvents = () => {
         hash: args[4].transactionHash,
       });
     },
-    chainId: 1,
+    chainId: 42161,
   });
 
   useContractEvent({
@@ -186,7 +186,7 @@ const useEvents = () => {
         hash: args[5].transactionHash,
       });
     },
-    chainId: 1,
+    chainId: 42161,
   });
 
   return events;

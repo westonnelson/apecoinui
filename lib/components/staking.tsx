@@ -23,7 +23,7 @@ interface poolStakesData {
 
 export default function Staking() {
   const { address, isConnected } = useAccount();
-  const { nftePrice } = usePrice();
+  const { nfteTokenPrice } = useNfteTokenPrice();
   const autoConnecitng = useAutoConnecting();
   const allowance = useAllowance();
   const [statsAddress, setStatsAddress] = useState<string>("");
@@ -243,7 +243,7 @@ export default function Staking() {
           </div>
         )} */}
 
-        <h2 className="text-4xl font-extrabold">nfteToken Staking Pool</h2>
+        <h2 className="text-4xl font-extrabold">NFTE Staking Pool</h2>
         <nfteTokenTable
           nfteTokenStakes={nfteTokenStakes}
           withdrawArgs={withdrawArgs}
@@ -252,7 +252,7 @@ export default function Staking() {
         />
 
         <h2 className="mt-10 text-4xl font-extrabold">
-          Bored Ape Yacht Club Pool
+          Earthlings Pool
         </h2>
 
         <NftTable
@@ -268,7 +268,7 @@ export default function Staking() {
         />
 
         <h2 className="mt-10 text-4xl font-extrabold">
-          Mutant Ape Yacht Club Pool
+          RoboRovers Pool
         </h2>
 
         <NftTable
@@ -284,7 +284,7 @@ export default function Staking() {
         />
 
         <h2 className="mt-10 text-4xl font-extrabold">
-          Bored Ape Kennel Club Pool
+          NFW3C Pool
         </h2>
 
         <Nfw3cTable

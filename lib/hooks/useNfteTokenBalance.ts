@@ -5,13 +5,13 @@ interface Map {
   [key: number]: string;
 }
 const nfteTokenContractAddresses: Map = {
-  1: "0xB261104A83887aE92392Fb5CE5899fCFe5481456",
+  42161: "0xB261104A83887aE92392Fb5CE5899fCFe5481456",
 } as const;
 
 import useStore from "@/stores/store";
 
-const useNfteTokenBalance = () => {
-  const nfteTokenBalance = useStore((state) => state.nfteTokenBalance);
+const usenfteTokenBalance = () => {
+  const NfteTokenBalance = useStore((state) => state.NfteTokenBalance);
   const setNfteTokenBalance = useStore((state) => state.setNfteTokenBalance);
 
   const { address, isConnected } = useAccount();
@@ -19,7 +19,7 @@ const useNfteTokenBalance = () => {
   const balance = useBalance({
     enabled: isConnected,
     address: address,
-    token: nfteTokenContractAddresses[chain?.id!] as `0x{String}`,
+    token: NfteTokenContractAddresses[chain?.id!] as `0x{String}`,
     watch: true,
   });
 
@@ -35,7 +35,7 @@ const useNfteTokenBalance = () => {
     }
   }, [isConnected]);
 
-  return { nfteTokenBalance, setNfteTokenBalance };
+  return { NfteTokenBalance, setNfteTokenBalance };
 };
 
 export default useNfteTokenBalance;

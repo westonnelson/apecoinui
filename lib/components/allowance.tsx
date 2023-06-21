@@ -27,7 +27,7 @@ export default function Allowance() {
 
   const allowanceContractRead = useContractRead({
     enabled: address !== undefined,
-    address: nfteTokenContractAddresses[chain?.id || 42161],
+    address: stakingContractAddresses[chain?.id || 42161],
     abi: ABI,
     functionName: "allowance",
     args: [address as `0x${string}`, stakingContractAddresses[chain?.id || 42161]],
@@ -35,7 +35,7 @@ export default function Allowance() {
 
   const { config } = usePrepareContractWrite({
     enabled: isConnected && allowanceContractRead.isSuccess,
-    address: nfteTokenContractAddresses[chain?.id || 42161],
+    address: stakingContractAddresses[chain?.id || 42161],
     abi: ABI,
     functionName: "approve",
     args: [
