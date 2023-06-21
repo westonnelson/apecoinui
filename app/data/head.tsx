@@ -13,9 +13,9 @@ export default function Head() {
         content="NFTE Staking Rewards - Tools and Information"
       />
       <meta property="og:site_name" content="NFTEarth" />
-      <meta property="og:url" content="https://apecoinui.com" />
+      <meta property="og:url" content="https://nftearth.exchange" />
       <meta property="og:type" content="website" />
-      <meta property="og:image" content="https://apecoinui.com/opengraph.png" />
+      <meta property="og:image" content="https://nftearth.exchange/opengraph.png" />
       <meta name="twitter:site" content="@NFTEarth_L2" />
       <meta name="twitter:title" content="NFTEarth" />
       <meta
@@ -23,7 +23,7 @@ export default function Head() {
         content="ApeCoin staking data and calculator to determine max you can stake and rewards."
       />
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:image:src" content="https://apecoinui.com/opengraph.png" />
+      <meta name="twitter:image:src" content="https://nftearth.exchange/opengraph.png" />
       <link rel="icon" href="./teeth.png" />
     </>
   );

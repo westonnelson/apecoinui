@@ -12,12 +12,12 @@ export default function Head() {
         property="og:title"
         content="Frequently Asked Questions about NFTEarth and staking rewards"
       />
-      <meta property="og:site_name" content="ApeCoin UI" />
+      <meta property="og:site_name" content="NFTEarth" />
       <meta property="og:url" content="https://apecoinui.com" />
       <meta property="og:type" content="website" />
       <meta property="og:image" content="https://apecoinui.com/opengraph.png" />
       <meta name="twitter:site" content="@ApeCollector" />
-      <meta name="twitter:title" content="ApeCoin UI" />
+      <meta name="twitter:title" content="NFTEarth" />
       <meta
         name="twitter:description"
         content="Frequently asked questions about ApeCoin, staking and related issues."

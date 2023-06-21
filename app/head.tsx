@@ -1,7 +1,7 @@
 export default function Head() {
   return (
     <>
-      <title>NFTEarth - NFTEarth user interface and tools</title>
+      <title>NFTEarth Staking</title>
       <link rel="icon" href="./teeth.png" />
       <meta charSet="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=0.5" />
