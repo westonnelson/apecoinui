@@ -13,13 +13,13 @@ import {
 import ABI from "@/abis/nfte";
 import { Map } from "@/types/map";
 
-const apecoinContractAddresses: Map = {
-  1: "0x4d224452801ACEd8B2F0aebE155379bb5D594381",
+const nfteTokenContractAddresses: Map = {
+  1: "0x3f770ac673856f105b586bb393d122721265ad46",
   5: "0x328507DC29C95c170B56a1b3A758eB7a9E73455c",
 };
 
 const stakingContractAddresses: Map = {
-  1: "0x5954aB967Bc958940b7EB73ee84797Dc8a2AFbb9",
+  1: "0xe3d143d7b864f2d0f76f9080d758ded8ca262b26",
   5: "0xeF37717B1807a253c6D140Aca0141404D23c26D4",
 };
 
