@@ -20,39 +20,38 @@ import {
 } from "wagmi";
 
 const stakingContractAddresses: Map = {
-  1: "0x5954aB967Bc958940b7EB73ee84797Dc8a2AFbb9",
-  5: "0xeF37717B1807a253c6D140Aca0141404D23c26D4",
+  42161: "0xe3d143d7b864f2d0f76f9080d758ded8ca262b26",
 } as const;
 
-function displayApeCoin(apecoin: BigNumber | number): string {
+function displaynfteToken(nfte: BigNumber | number): string {
   return Intl.NumberFormat("en-US", {
     maximumFractionDigits: 4,
-  }).format(+ethers.utils.formatUnits(apecoin));
+  }).format(+ethers.utils.formatUnits(nfteToken));
 }
 
-const ClaimApeCoin = () => {
+const ClaimnfteToken = () => {
   const { chain } = useNetwork();
   const { address } = useAccount();
-  const { apeCoinStakes } = useAllStakes(address as string);
+  const { nfteTokenStakes } = useAllStakes(address as string);
 
-  const apeCoinPrepareContractWrite = usePrepareContractWrite({
-    address: stakingContractAddresses[chain?.id || 1],
+  const nfteTokenPrepareContractWrite = usePrepareContractWrite({
+    address: stakingContractAddresses[chain?.id || 42161],
     abi: ABI,
-    functionName: "claimSelfApeCoin",
+    functionName: "claimSelfnfteToken",
   });
 
-  const apeCoinContractWrite = useContractWrite(
-    apeCoinPrepareContractWrite.config
+  const nfteTokenContractWrite = useContractWrite(
+    nfteTokenPrepareContractWrite.config
   );
 
   useEffect(() => {
-    apeCoinContractWrite.write?.();
+    nfteTokenContractWrite.write?.();
   }, []);
 
-  if (!apeCoinStakes) return <>No apecoin</>;
+  if (!nfteTokenStakes) return <>No nfteToken</>;
   return (
     <>
-      Claim {displayApeCoin(apeCoinStakes[0].unclaimed)} from ApeCoin Pool{" "}
+      Claim {displaynfteToken(nfteTokenStakes[0].unclaimed)} from nfteToken Pool{" "}
       <CheckCircleIcon className="h-5 w-5 text-green-500" />
       <a
         href=""
@@ -64,15 +63,15 @@ const ClaimApeCoin = () => {
   );
 };
 
-const ClaimBayc = () => {
+const ClaimEARTHLINGS = () => {
   const { chain } = useNetwork();
   const { address } = useAccount();
 
-  const { baycStakes } = useAllStakes(address as string);
+  const { EARTHLINGSStakes } = useAllStakes(address as string);
 
   const [state, setState] = useState<string>();
 
-  const args = baycStakes
+  const args = EARTHLINGSStakes
     ?.map((token) => {
       if (token.unclaimed?.gt(0)) {
         return token.tokenId.toNumber();
@@ -82,33 +81,33 @@ const ClaimBayc = () => {
       return token !== undefined;
     });
 
-  const baycPrepareContractWrite = usePrepareContractWrite({
-    address: stakingContractAddresses[chain?.id || 1],
+  const EARTHLINGSPrepareContractWrite = usePrepareContractWrite({
+    address: stakingContractAddresses[chain?.id || 42161],
     abi: ABI,
-    functionName: "claimSelfBAYC",
+    functionName: "claimSelfEARTHLINGS",
     args: [args as any],
   });
 
-  const baycContractWrite = useContractWrite(baycPrepareContractWrite.config);
+  const EARTHLINGSContractWrite = useContractWrite(EARTHLINGSPrepareContractWrite.config);
 
-  const baycPoolUnclaimed =
-    baycStakes?.reduce((total, token) => {
+  const EARTHLINGSPoolUnclaimed =
+    EARTHLINGSStakes?.reduce((total, token) => {
       return total.add(token.unclaimed);
     }, ethers.constants.Zero) || 0;
 
 //   useEffect(() => {
 //     if (state !== "started") {
-//       if (baycContractWrite.write) {
+//       if (EARTHLINGSContractWrite.write) {
 //         setState("started");
-//         baycContractWrite.write();
+//         EARTHLINGSContractWrite.write();
 //       }
 //     }
-//   }, [baycContractWrite.write]);
+//   }, [EARTHLINGSContractWrite.write]);
 
-  if (!baycStakes) return <>No bayc rewards</>;
+  if (!EARTHLINGSStakes) return <>No EARTHLINGS rewards</>;
   return (
     <>
-      Claim {displayApeCoin(baycPoolUnclaimed)} from BAYC Pool{" "}
+      Claim {displaynfteToken(EARTHLINGSPoolUnclaimed)} from EARTHLINGS Pool{" "}
       <CheckCircleIcon className="h-5 w-5 text-green-500" />
       <a
         href=""
@@ -136,20 +135,20 @@ const ClaimAllModal: React.FC<{
         <Modal.Body>
           <div className="space-y-4">
             <p className="text-sm">
-              To claim all your ApeCoin staking rewards you will need to create
+              To claim all your NFTE staking rewards you will need to create
               3 separate transactions from your wallet which should have opened
               automatically. If it did not open please check it manually.
             </p>
 
             <ol className="gap-y-4">
               <li className="flex items-center gap-2 py-1 text-sm text-gray-500 dark:text-gray-400">
-                <ClaimApeCoin />
+                <ClaimnfteToken />
               </li>
 
               <li className="flex items-center gap-2 py-1 text-sm text-gray-500 dark:text-gray-400">
-                <ClaimBayc />
+                <ClaimEARTHLINGS />
               </li>
-              {/* 1) Claim {displayApeCoin(apeCoinPoolUnclaimed)} from ApeCoin
+              {/* 1) Claim {displaynfteToken(nfteTokenPoolUnclaimed)} from nfteToken
                 Pool <CheckCircleIcon className="h-5 w-5 text-green-500" />
                 <a
                   href=""
@@ -160,24 +159,24 @@ const ClaimAllModal: React.FC<{
               </li>
 
               <li className="flex items-center gap-2 py-1 text-sm text-gray-500 dark:text-gray-400">
-                1) Claim {displayApeCoin(baycPoolUnclaimed)} from ApeCoin Pool{" "}
+                1) Claim {displaynfteToken(EARTHLINGSPoolUnclaimed)} from nfteToken Pool{" "}
                 <XCircleIcon className="h-5 w-5 text-red-800 dark:text-red-500" />{" "}
                 <span className="text-sm text-red-900 dark:text-red-400">
                   Rejected
                 </span>
               </li>
               <li className="flex items-center gap-2 py-1 text-sm">
-                2) Claim {displayApeCoin(baycPoolUnclaimed)} from BAYC Pool{" "}
+                2) Claim {displaynfteToken(EARTHLINGSPoolUnclaimed)} from EARTHLINGS Pool{" "}
                 <WalletIcon className="h-5 w-5" />{" "}
                 <span className="text-sms">Confirm</span>
               </li>
               <li className="flex items-center gap-2 py-1 text-sm">
-                2) Claim {displayApeCoin(maycPoolUnclaimed)} from MAYC Pool{" "}
+                2) Claim {displaynfteToken(ROBOROVERSPoolUnclaimed)} from ROBOROVERS Pool{" "}
                 <WalletIcon className="h-5 w-5" />{" "}
                 <span className="text-sms">Confirm</span>
               </li>
               <li className="flex items-center gap-2 py-1 text-sm">
-                2) Claim {displayApeCoin(baycPoolUnclaimed)} from BAYC Pool{" "}
+                2) Claim {displaynfteToken(EARTHLINGSPoolUnclaimed)} from EARTHLINGS Pool{" "}
                 <ClockIcon className="h-5 w-5  text-blue-800 hover:underline dark:text-blue-500" />
                 <a
                   href=""
@@ -187,7 +186,7 @@ const ClaimAllModal: React.FC<{
                 </a>
               </li>
               <li className="flex items-center py-1 text-sm text-gray-500 dark:text-gray-400">
-                3) Claim {displayApeCoin(bakcPoolUnclaimed)} from BAKC Pool{" "}
+                3) Claim {displaynfteToken(NFW3CPoolUnclaimed)} from NFW3C Pool{" "}
               </li> */}
             </ol>
           </div>

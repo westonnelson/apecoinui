@@ -4,8 +4,7 @@ import { Map } from "@/types/map";
 import { BigNumber } from "ethers";
 
 const stakingContractAddresses: Map = {
-  1: "0x5954aB967Bc958940b7EB73ee84797Dc8a2AFbb9",
-  5: "0xeF37717B1807a253c6D140Aca0141404D23c26D4",
+  42161: "0xe3d143d7b864f2d0f76f9080d758ded8ca262b26",
 } as const;
 
 export interface poolStakesData {
@@ -25,11 +24,11 @@ function useAllStakes(addressOrEns: string) {
 
   const poolsContractRead = useContractRead({
     enabled: addressOrEns !== undefined && addressOrEns !== "",
-    address: stakingContractAddresses[chain?.id || 1],
+    address: stakingContractAddresses[chain?.id || 42161],
     abi: StakingABI,
     functionName: "getAllStakes",
     watch: true,
-    chainId: chain?.id || 1,
+    chainId: chain?.id || 42161,
     args: [data as `0x${string}`],
   });
 

@@ -11,12 +11,12 @@ export default async function Page() {
       </div>
 
       <div className="mt-10">
-        <h3 className="text-3xl font-bold">Live staking data:</h3>
+        <h3 className="text-3xl font-bold">Real-Time Staking Activity</h3>
         <Data />
       </div>
 
       <div className="mt-10">
-        <h3 className="text-3xl font-bold">Staking calculator:</h3>
+        <h3 className="text-3xl font-bold">Staking Calculator:</h3>
         <Calculator />
       </div>
 
