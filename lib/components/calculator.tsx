@@ -55,31 +55,31 @@ export default function Calculator() {
 
   const PoolDataArray: PoolDataInterface[] = [
     {
-      type: PoolType.APE,
+      type: PoolType.NFTE,
       ownedCount: nfteTokenOwnedCount,
       setOwnedCount: setnfteTokenOwnedCount,
       toStake: nfteTokenToStakeCount,
       setToStakeCount: setnfteTokenToStakeCount,
     },
     {
-      type: PoolType.earthlings,
-      maxStakeAmount: 10094,
+      type: PoolType.EARTHLINGS,
+      maxStakeAmount: 5000,
       ownedCount: earthlingsTokenOwnedCount,
       setOwnedCount: setearthlingsTokenOwnedCount,
       toStake: earthlingsTokenToStakeCount,
       setToStakeCount: setearthlingsTokenToStakeCount,
     },
     {
-      type: PoolType.roborovers,
-      maxStakeAmount: 2042,
+      type: PoolType.ROBOROVERS,
+      maxStakeAmount: 250,
       ownedCount: roboroversTokenOwnedCount,
       setOwnedCount: setroboroversTokenOwnedCount,
       toStake: roboroversTokenToStakeCount,
       setToStakeCount: setroboroversTokenToStakeCount,
     },
     {
-      type: PoolType.nfw3c,
-      maxStakeAmount: 856,
+      type: PoolType.NFW3C,
+      maxStakeAmount: 100,
       ownedCount: nfw3cTokenOwnedCount,
       setOwnedCount: setnfw3cTokenOwnedCount,
       toStake: nfw3cTokenToStakeCount,
@@ -194,10 +194,10 @@ export default function Calculator() {
                 Owned Token Count
               </th>
               <th className="flex w-1/3 items-center p-4 text-left font-semibold tracking-wide">
-                nfteToken To Stake
+                NFTE To Stake
               </th>
               <th className="flex w-1/3 items-center p-4 text-left font-semibold tracking-wide">
-                {timeframe} nfteToken Reward
+                {timeframe} NFTE Reward
               </th>
             </tr>
           </thead>
@@ -208,7 +208,7 @@ export default function Calculator() {
                   <td className="flex w-1/3 flex-wrap items-center gap-2 p-4">
                     <input
                       className={`${
-                        pool != PoolType.APE ? "w-16" : "w-28"
+                        pool != PoolType.NFTE ? "w-16" : "w-28"
                       } border px-2 dark:border-zinc-500 dark:bg-zinc-800`}
                       value={PoolDataObject[pool].ownedCount}
                       onChange={(e) => {
@@ -220,7 +220,7 @@ export default function Calculator() {
                     />
                     <span>
                       {poolData.poolData[pool].name}
-                      {pool != PoolType.APE && <>&nbsp;NFTs</>}
+                      {pool != PoolType.NFTE && <>&nbsp;NFTs</>}
                     </span>{" "}
                   </td>
                   <td className="flex w-1/3 flex-wrap items-center gap-2 p-4">

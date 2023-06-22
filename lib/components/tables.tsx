@@ -6,9 +6,9 @@ import useNfteTokenBalance from "@/hooks/useNfteTokenBalance";
 import { useState } from "react";
 
 const MAX_STAKES = {
-  1: TBD,
-  2: TBD,
-  3: TBD,
+  1: 5000,
+  2: 250,
+  3: 100,
 } as const;
 
 interface poolStakesData {
